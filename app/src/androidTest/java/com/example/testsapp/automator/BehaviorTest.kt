@@ -156,6 +156,19 @@ class BehaviorTest {
         Assert.assertEquals("Number of results: 42", changedTextDetails.text.toString())
     }
 
+    @Test
+    fun test_SearchButtonIsNegative() {
+
+        val searchButton = uiDevice.findObject(By.res(packageName, "searchButton"))
+        searchButton.click()
+
+        val toast = uiDevice.wait(Until.findObject(By.clazz("android.widget.Toast")), TIMEOUT)
+
+        Assert.assertNotNull(toast)
+
+        //Assert.assertEquals("Enter search word", toast.text.toString())
+    }
+
     companion object {
         private const val TIMEOUT = 5000L
     }
