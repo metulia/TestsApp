@@ -9,10 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObject2
-import androidx.test.uiautomator.Until
+import androidx.test.uiautomator.*
 import com.example.testsapp.R
 import org.junit.Assert
 import org.junit.Before
@@ -99,7 +96,7 @@ class BehaviorTest {
                 TIMEOUT
             )
 
-        Assert.assertEquals(changedText.text.toString(), "Number of results: 42")
+        Assert.assertEquals("Number of results: 42", changedText.text.toString())
     }
 
     //Убеждаемся, что DetailsScreen открывается
@@ -127,7 +124,36 @@ class BehaviorTest {
         //так как мы кликаем по кнопке не отправляя никаких поисковых запросов.
         //Чтобы проверить отображение определенного количества репозиториев,
         //вам в одном и том же методе нужно отправить запрос на сервер и открыть DetailsScreen.
-        Assert.assertEquals(changedText.text, "Number of results: 0")
+        Assert.assertEquals("Number of results: 0", changedText.text.toString())
+    }
+
+    @Test
+    fun test_OpenDetailsScreenAndIsPositive() {
+
+        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        editText.text = "UiAutomator"
+
+        val searchButton = uiDevice.findObject(By.res(packageName, "searchButton"))
+        searchButton.click()
+
+        val changedText =
+            uiDevice.wait(
+                Until.findObject(By.res(packageName, "totalCountTextView")),
+                TIMEOUT
+            )
+
+        Assert.assertEquals("Number of results: 42", changedText.text.toString())
+
+        val toDetails = uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
+        toDetails.click()
+
+        val changedTextDetails =
+            uiDevice.wait(
+                Until.findObject(By.res(packageName, "totalCountTextView")),
+                TIMEOUT
+            )
+
+        Assert.assertEquals("Number of results: 42", changedTextDetails.text.toString())
     }
 
     companion object {
