@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         recyclerView.adapter = adapter
     }
 
-    private fun setQueryListener() {
+    /*private fun setQueryListener() {
         searchEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = searchEditText.text.toString()
@@ -63,6 +63,21 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
                 }
             }
             false
+        })
+    }*/
+
+    private fun setQueryListener() {
+        searchButton.setOnClickListener(View.OnClickListener {
+            val query = searchEditText.text.toString()
+            if (query.isNotBlank()) {
+                presenter.searchGitHub(query)
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.enter_search_word),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         })
     }
 

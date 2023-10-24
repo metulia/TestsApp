@@ -84,6 +84,24 @@ class BehaviorTest {
         Assert.assertEquals(changedText.text.toString(), "Number of results: 42")
     }
 
+    @Test
+    fun test_SearchButtonIsPositive() {
+
+        val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        editText.text = "UiAutomator"
+
+        val searchButton = uiDevice.findObject(By.res(packageName, "searchButton"))
+        searchButton.click()
+
+        val changedText =
+            uiDevice.wait(
+                Until.findObject(By.res(packageName, "totalCountTextView")),
+                TIMEOUT
+            )
+
+        Assert.assertEquals(changedText.text.toString(), "Number of results: 42")
+    }
+
     //Убеждаемся, что DetailsScreen открывается
     @Test
     fun test_OpenDetailsScreen() {
