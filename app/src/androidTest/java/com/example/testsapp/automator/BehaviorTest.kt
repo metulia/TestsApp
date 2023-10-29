@@ -78,7 +78,7 @@ class BehaviorTest {
             )
         //Убеждаемся, что сервер вернул корректный результат. Обратите внимание, что количество
         //результатов может варьироваться во времени, потому что количество репозиториев постоянно меняется.
-        Assert.assertEquals(changedText.text.toString(), "Number of results: 42")
+        Assert.assertEquals(TEST_NUMBER, changedText.text.toString())
     }
 
     @Test
@@ -96,7 +96,7 @@ class BehaviorTest {
                 TIMEOUT
             )
 
-        Assert.assertEquals("Number of results: 42", changedText.text.toString())
+        Assert.assertEquals(TEST_NUMBER, changedText.text.toString())
     }
 
     //Убеждаемся, что DetailsScreen открывается
@@ -124,7 +124,7 @@ class BehaviorTest {
         //так как мы кликаем по кнопке не отправляя никаких поисковых запросов.
         //Чтобы проверить отображение определенного количества репозиториев,
         //вам в одном и том же методе нужно отправить запрос на сервер и открыть DetailsScreen.
-        Assert.assertEquals("Number of results: 0", changedText.text.toString())
+        Assert.assertEquals(TEST_NUMBER_OF_RESULTS_ZERO, changedText.text.toString())
     }
 
     @Test
@@ -142,7 +142,7 @@ class BehaviorTest {
                 TIMEOUT
             )
 
-        Assert.assertEquals("Number of results: 42", changedText.text.toString())
+        Assert.assertEquals(TEST_NUMBER, changedText.text.toString())
 
         val toDetails = uiDevice.findObject(By.res(packageName, "toDetailsActivityButton"))
         toDetails.click()
@@ -153,7 +153,7 @@ class BehaviorTest {
                 TIMEOUT
             )
 
-        Assert.assertEquals("Number of results: 42", changedTextDetails.text.toString())
+        Assert.assertEquals(TEST_NUMBER, changedTextDetails.text.toString())
     }
 
     @Test
